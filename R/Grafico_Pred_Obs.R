@@ -1,6 +1,6 @@
-#' @title Regressão Linear Múltipla
+#' @title Gráfico de Valores Preditos \eqn{\times} Valores Observados
 #' @description
-#' Esta função retorna um gráfico de valores preditos \eqn{\times} valores observados como base em modelo de regressão linear ajustado.
+#' Esta função retorna o gráfico de valores preditos \eqn{\times} valores observados com base em um modelo de regressão linear ajustado.
 #'
 #' @param regressao Um modelo de regressão ajustado com a função `regressao()`.
 #'

@@ -18,7 +18,7 @@ Uma lista contendo os coeficientes estimados, os resíduos e os valores preditos
 }
 \description{
 Esta função ajusta um modelo de regressão linear múltipla com intercepto.
-\deqn{Y=X\beta + \epsilon}
+\deqn{Y_{n \times 1}=X_{n \times p}\beta_{p \times 1} + \epsilon_{n \times 1}}
 
 Encontra a estimativa dos coeficientes de uma regressão linear utilizando o método dos quadrados mínimos:
 \deqn{\hat{\beta}=(X^TX)^{-1}X^TY}
@@ -28,6 +28,9 @@ Encontra os valores preditos do modelo da seguinte forma:
 
 Encontra os resíduos do modelo da seguite forma:
 \deqn{\hat{\epsilon}=Y-X\hat{\beta}}
+
+Encontra o erro padrão dos coeficientes estimados da seguite forma:
+\deqn{\hat{ep}(\hat{\beta}) = \sqrt{\frac{\hat{\epsilon}^T\hat{\epsilon}}{n-p}diag((X^TX)^{-1})}}
 }
 \details{
 Somente realiza cálculos para variáveis quantitativas.

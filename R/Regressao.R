@@ -1,7 +1,7 @@
 #' @title Regressão Linear Múltipla
 #' @description
 #' Esta função ajusta um modelo de regressão linear múltipla com intercepto.
-#' \deqn{Y=X\beta + \epsilon}
+#' \deqn{Y_{n \times 1}=X_{n \times p}\beta_{p \times 1} + \epsilon_{n \times 1}}
 #'
 #' Encontra a estimativa dos coeficientes de uma regressão linear utilizando o método dos quadrados mínimos:
 #' \deqn{\hat{\beta}=(X^TX)^{-1}X^TY}
@@ -11,6 +11,9 @@
 #'
 #' Encontra os resíduos do modelo da seguite forma:
 #' \deqn{\hat{\epsilon}=Y-X\hat{\beta}}
+#'
+#' Encontra o erro padrão dos coeficientes estimados da seguite forma:
+#' \deqn{\hat{ep}(\hat{\beta}) = \sqrt{\frac{\hat{\epsilon}^T\hat{\epsilon}}{n-p}diag((X^TX)^{-1})}}
 #'
 #' @details
 #' Somente realiza cálculos para variáveis quantitativas.
@@ -44,6 +47,13 @@ regressao <- function(X, Y, dados){
   rownames(coeficientes) <- nomes_coeficientes
   valores_preditos <- matrizX %*% coeficientes
   residuos <- vetorY - valores_preditos
+  n <- nrow(matrizX)
+  p <- ncol(matrizX)
+  ete <- t(residuos) %*% residuos
+  XtX_inv <- solve(t(matrizX) %*% matrizX)
+  XtX_inv_diag <- as.vector(diag(XtX_inv))
+  erro_padrao <- as.matrix(sqrt(as.vector((ete/(n-p))) * XtX_inv_diag))
+  rownames(erro_padrao) <- nomes_coeficientes
   return(list(coeficientes = coeficientes, residuos = residuos,
-              valores_preditos = valores_preditos))
+              valores_preditos = valores_preditos, erro_padrao = erro_padrao))
 }
