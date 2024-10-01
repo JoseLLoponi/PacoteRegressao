@@ -26,5 +26,5 @@ predicao <- function(regressao, predicao){
   predicao_com_intercepto <- c(1, predicao)
   if(length(predicao_com_intercepto) != length(regressao$coeficientes)){stop("O vetor de valores para as variáveis preditores deve ter comprimento igual ao número de variáveis preditoras.")}
   valor_predito <- t(regressao$coeficientes) %*% predicao_com_intercepto
-  return(valor_predito)
+  return(as.numeric(valor_predito))
 }

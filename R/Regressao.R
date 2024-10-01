@@ -54,6 +54,7 @@ regressao <- function(X, Y, dados){
   XtX_inv_diag <- as.vector(diag(XtX_inv))
   erro_padrao <- as.matrix(sqrt(as.vector((ete/(n-p))) * XtX_inv_diag))
   rownames(erro_padrao) <- nomes_coeficientes
+  if(sum(abs(residuos)) < 1e-10){warning('O modelo se ajustou quase perfeitamente aos dados, possivelmente está incorreto.')}
   return(list(coeficientes = coeficientes, residuos = residuos,
               valores_preditos = valores_preditos, erro_padrao = erro_padrao))
 }
