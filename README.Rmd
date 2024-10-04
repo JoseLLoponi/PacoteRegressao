@@ -25,14 +25,54 @@ devtools::install_github("JoseLLoponi/PacoteRegressao")
 #### Exemplo: ####
 
 ```
-ajuste1 <- regressao(X = c('B'), Y = 'A', dados = sodad)
-ajuste1
-ajuste2 <- regressao(X = c('A', 'B'), Y = 'C', dados = sodad)
-ajuste2
-ajuste3 <- regressao(X = c('A', 'B', 'D'), Y = 'E', dados = sodad)
-ajuste3
-ajuste4 <- regressao(X = c('A', 'C', 'D', 'E'), Y = 'B', dados = sodad)
-ajuste4
+ajuste <- regressao(X = c('A', 'C', 'D', 'E'), Y = 'B', dados = sodad)
+ajuste
+```
+
+###### Saída ######
+
+```
+$coeficientes
+               [,1]
+beta_0 -19.11626698
+beta_1   0.72408230
+beta_2   0.05297488
+beta_3   2.68310613
+beta_4   0.29103939
+
+$residuos
+            [,1]
+ [1,] -11.962962
+ [2,] -28.180536
+ [3,]  16.390033
+ [4,] -38.070674
+ [5,]   7.488944
+ [6,]   7.029919
+ [7,]  30.943683
+ [8,] -10.160163
+ [9,]  27.560516
+[10,]  -1.038758
+
+$valores_preditos
+          [,1]
+ [1,] 46.23360
+ [2,] 74.76284
+ [3,] 43.42510
+ [4,] 65.01603
+ [5,] 35.79854
+ [6,] 86.35304
+ [7,] 67.41398
+ [8,] 43.07552
+ [9,] 70.92994
+[10,] 52.93199
+
+$erro_padrao
+             [,1]
+beta_0 65.2920886
+beta_1  0.5939383
+beta_2  0.3493928
+beta_3 17.8428471
+beta_4  0.7417311
 ```
 
 2. Para fazer predições para novos valores com o modelo, use a função `predicao(regressao, predicao)`, onde `regressao` é um modelo ajustado com a função `regressao()` e `predicao` é um vetor numérico com os valores desejados dos preditores, na mesma ordem em que foram especificados no ajuste do modelo.
@@ -40,10 +80,13 @@ ajuste4
 #### Exemplo: ####
 
 ```
-predicao(ajuste1, c(1))
-predicao(ajuste2, c(1, 2))
-predicao(ajuste3, c(1, 2, 3))
-predicao(ajuste4, c(1, 2, 3, 4))
+predicao(ajuste, c(1, 2, 3, 4))
+```
+
+###### Saída ######
+
+```
+[1] -9.072759
 ```
 
 3. Também é possível construir gráficos de diagnóstico para avaliar a qualidade do ajuste. Para fazer um gráfico de valores preditos x valores observados, use a função `grafico_pred_obs(regressao)`, onde `regressao` é o modelo de regressão ajustado com a função `regressão()`.
@@ -51,19 +94,21 @@ predicao(ajuste4, c(1, 2, 3, 4))
 #### Exemplo: ####
 
 ```
-grafico_pred_obs(ajuste1)
-grafico_pred_obs(ajuste2)
-grafico_pred_obs(ajuste3)
-grafico_pred_obs(ajuste4)
+grafico_pred_obs(ajuste)
 ```
+
+###### Saída ######
+
+![](Grafico_Exemplo_1.png)
 
 4. Além disso,  é possível construir um Q-Q plot dos resíduos do modelo para avaliar a suposição de normalidade. Para isso, use a função `grafico_qq(regressao)`, com `regressao` sendo o modelo ajustado com a função `regressão()`.
 
 #### Exemplo: ####
 
 ```
-grafico_qq(ajuste1)
-grafico_qq(ajuste2)
-grafico_qq(ajuste3)
-grafico_qq(ajuste4)
+grafico_qq(ajuste)
 ```
+
+###### Saída ######
+
+![](Grafico_Exemplo_2.png)
